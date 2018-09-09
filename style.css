@@ -1,0 +1,68 @@
+.cell {}
+
+.blue_piece {
+	background-color: #00F2C7;
+}
+
+.red_piece {
+	background-color: #A02200;
+}
+
+body {
+	background-image: url(bananas.png);
+	background-repeat:repeat;
+}
+
+h1 {
+	text-align: center;
+	vertical-align: middle;
+	width: 436px;
+	font-family: "Helvetica";
+	font-size: 24px;
+	cursor: pointer;
+}
+
+td {
+	background-color: tan;
+	border: 2px solid #333;
+	height: 100px;
+	width: 100px;
+	text-align: center;
+	vertical-align: middle;
+	font-family: "Helvetica", bold;
+	font-size: 70px;
+	cursor: pointer;
+}
+
+table {
+	border-style: inset;
+	border-width: 10px;
+	border-collapse: collapse;
+	/*position: absolute;*/
+	align-content: center;
+	/*left: 50;*/
+	top: 50px
+}
+
+.disp_score {
+	width: 100px;
+	background-color: none;
+	position: absolute;
+	left: 50;
+	text-align: center;
+	border-radius: 5px;
+	color: white;
+	font-size: 2em;
+}
+
+.endgame {
+	display: none;
+	width: 436px;
+	top: 120px;
+	background-color: rgba(130,200,60,0.8);
+	left: 50;
+	text-align: center;
+	border-radius: 5px;
+	color: black;
+	font-size: 2em;
+}
