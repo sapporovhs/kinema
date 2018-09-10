@@ -1,10 +1,10 @@
 var origBoard;
-const HUMAN = "human";
-const AI = "ai";
+const HUMAN = "Human";
+const AI = "Ai";
 const numPlayers = 2;
 const SCORE_TO_WIN = 10;
-let currentTurn = 0;
-
+const STARTING_PLAYER = 0;
+const AI_STRATEGY = Math.floor(Math.random()*2);
 class Player {
 	constructor(pType, pieceColor) {
 		this.pType = pType;
@@ -55,6 +55,12 @@ const combo2 = [	//scores 2 points
 	[10,11,14,15]
 ]
 
+const aiStrategy = [
+	//X-strategy
+	[0,3,5,6,9,10,12,15],
+	//biggest possible combo strategy
+	[0,5,6,8,9,11,14,15,10]
+]
 // main
 const cells = document.querySelectorAll('.cell');
 startGame();
@@ -62,7 +68,7 @@ startGame();
 //start new game
 function startGame() {
 	players[0].score=players[1].score=0;
-	currentTurn = 0;
+	currentTurn = STARTING_PLAYER;
 	document.querySelector(".endgame").style.display = "none";
 	document.getElementById("disp_current_player").className = "blue_piece";
 	document.getElementById("disp_scores").innerText = players[0].score+" - "+players[1].score;
@@ -72,6 +78,7 @@ function startGame() {
 		cells[i].style.removeProperty('background-color');
 		cells[i].addEventListener('click', tryMove, false)
 	}
+	if(currentTurn==1) {aiMove()}
 }
 
 // make move
@@ -84,11 +91,12 @@ function tryMove(square) {
 		currentTurn = (currentTurn+1)%numPlayers
 		moveSuccess = true;
 	}
-	console.log(square.id)
+	if(!moveSuccess) {return moveSuccess} // return if failed
 	document.getElementById("disp_scores").innerText = players[0].score+" - "+players[1].score;
 	if(players[currentTurn].pType == AI) {
-		aiMove();
+		moveSuccess = aiMove();
 	}
+	for (var i = 0; i < players.length; i++) {document.getElementById("p"+i).style.width = players[i].score/SCORE_TO_WIN*436}
 	return moveSuccess;
 }
 
@@ -97,8 +105,8 @@ function move(squareId, currentPlayer) {
 	origBoard[squareId] = currentPlayer.pieceColor;
 	currentTurn == 0 ? document.getElementById(squareId).className = "blue_piece" : document.getElementById(squareId).className = "red_piece"
 	currentTurn == 1 ? document.getElementById("disp_current_player").className = "blue_piece" : document.getElementById("disp_current_player").className = "red_piece"
-	let c = 0;
-	let s = 0;
+	let c = 0;//combos made ***
+	let s = 0;//points earned by combos
 	[c, s] = checkCombo(origBoard, currentPlayer);
 	currentPlayer.score += s;
 	let gameWon = checkWin(players);
@@ -106,7 +114,12 @@ function move(squareId, currentPlayer) {
 }
 
 function aiMove() {
-	tryMove(document.getElementById(Math.floor(Math.random() * 16)));
+	let moveSuccess = false;
+	for(var i = 0; i < aiStrategy[AI_STRATEGY].length && !moveSuccess; i++) {
+		moveSuccess = tryMove(document.getElementById(aiStrategy[AI_STRATEGY][i]))
+	}
+	while(!moveSuccess) {moveSuccess = tryMove(document.getElementById(Math.floor(Math.random()*16)))}
+	return moveSuccess
 }
 
 function checkWin(players){

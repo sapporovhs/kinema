@@ -38,10 +38,18 @@
 	</table>
 	<h1 id="disp_current_player">Current Player</h1>
 	<h1><span id="disp_scores"></span></h1>
-	<div class="endgame">
-		<div class="text"></div>
+	<div class="pts_bar" id="p0"></div>
+	<div class="pts_bar" id="p1"></div>
+	<div class="center_div">
+		<button class="replay_button" onClick="startGame()">Replay</button>
+		<h2 class="rules">Score 11 POINTS to win.</h2>
+		<h2 class="rules">1 POINT: Connect 3 vertical or horizontal.</h2>
+		<h2 class="rules">2 POINTS: Complete a row or column, 2x2 box, diagonal, or 4 corners.</h2>
+		<h2 class="rules">Mulitple combos can share a piece. Clear opponent pieces by completing the board.</h2>
+		<div class="endgame">
+			<div class="text"></div>
+		</div>
 	</div>
-	<button onClick="startGame()">Replay</button>
 	<script src="script.js"></script>
 </body>
 </html>
