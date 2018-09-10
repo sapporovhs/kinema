@@ -106,7 +106,7 @@ function move(squareId, currentPlayer) {
 }
 
 function aiMove() {
-	tryMove(document.getElementById(Math.floor(Math.random() * 15)));
+	tryMove(document.getElementById(Math.floor(Math.random() * 16)));
 }
 
 function checkWin(players){
