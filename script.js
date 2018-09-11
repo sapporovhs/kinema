@@ -1,10 +1,15 @@
-var origBoard;
+//"Kinema" - simple board game by Anthony F. George: midisaurus@gmail.com
+
+//Constants
 const HUMAN = "Human";
-const AI = "Ai";
+const AI = "AI";
 const numPlayers = 2;
-const SCORE_TO_WIN = 10;
+const SCORE_TO_WIN = 11;
 const STARTING_PLAYER = 0;
 const AI_STRATEGY = Math.floor(Math.random()*2);
+//Global variables
+var origBoard;
+//Player class
 class Player {
 	constructor(pType, pieceColor) {
 		this.pType = pType;
@@ -124,14 +129,18 @@ function aiMove() {
 
 function checkWin(players){
 	for(var i = 0; i < players.length; i++) {
-		if(players[i].score > SCORE_TO_WIN) {return i}
+		if(players[i].score >= SCORE_TO_WIN) {return i}
 	}
 	return -1
 }
 
 function gameOver(gameWon) {
-	document.querySelector(".endgame").innerText = players[gameWon].pType+" Wins!";
 	document.querySelector(".endgame").style.display = "block";
+	document.querySelector(".endgame").innerText = players[gameWon].pType+" Wins!";
+	document.getElementById("win_message").style.backgroundColor = gameWon == 0 ? "#00F2C7" : "#A02200";
+	for (var i = 0; i < cells.length; i++){
+		cells[i].removeEventListener("click",tryMove,false);
+	}
 }
 
 //check if combos have been formed, apply points, clear cells

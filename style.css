@@ -39,7 +39,7 @@
 }
 
 body {
-	background-image: url(bananas.png);
+	background-image: url(memphis-colorful.png);
 	background-repeat:repeat;
 }
 
@@ -82,13 +82,20 @@ td {
 
 .endgame {
 	display: none;
-	width: 436px;
-	top: 120px;
-	background-color: rgba(130,200,60,0.8);
-	left: 50;
+	width: 50%;
+	padding-top: 20%;
+	padding-bottom: 20%;
+	top: 0%;
+	left: 25%;
+	right: 25%;
+	opacity: 0.8;
+	position: absolute;
 	text-align: center;
-	margin: 0px auto;
 	border-radius: 5px;
 	color: black;
 	font-size: 2em;
+}
+
+#qrcode {
+  text-align: center;
 }
